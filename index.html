@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="sk" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MirIS – Jednoduché weby pre každého</title>
+  <meta name="description" content="MirIS vytvára jednoduché, prehľadné a cenovo dostupné weby pre jednotlivcov a malé firmy. Bez technických znalostí na vašej strane." />
+  <meta name="keywords" content="tvorba web stránok, jednoduché weby, webové stránky, MirIS, landing page, firemná stránka" />
+  <meta name="author" content="MirIS" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="MirIS – Jednoduché weby pre každého" />
+  <meta property="og:description" content="Tvorba jednoduchých, prehľadných a cenovo dostupných webov pre jednotlivcov a malé firmy." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://miris.sk" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="MirIS" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23818cf8'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='6' fill='url(%23g)'/%3E%3Ctext x='16' y='22' font-size='18' text-anchor='middle' fill='%23fff' font-weight='800' font-family='system-ui'%3EM%3C/text%3E%3C/svg%3E" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,29 +29,67 @@
       --primary-light: #a5b4fc;
       --accent: #f59e0b;
       --accent2: #ec4899;
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    [data-theme="dark"] {
       --bg: #0a0a0f;
       --surface: #111118;
       --surface2: #1a1a2e;
       --text: #f1f5f9;
+      --text-secondary: #cbd5e1;
       --muted: #94a3b8;
       --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.12);
       --glow: rgba(99,102,241,0.35);
+      --nav-bg: rgba(10,10,15,0.8);
+      --card-bg: #111118;
+      --input-bg: rgba(255,255,255,0.05);
+      --shadow: rgba(0,0,0,0.4);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface2: #f1f5f9;
+      --text: #0f172a;
+      --text-secondary: #334155;
+      --muted: #64748b;
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.15);
+      --glow: rgba(99,102,241,0.2);
+      --nav-bg: rgba(255,255,255,0.8);
+      --card-bg: #ffffff;
+      --input-bg: rgba(0,0,0,0.03);
+      --shadow: rgba(0,0,0,0.1);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: var(--font);
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* SCROLLBAR */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
+
+    /* REVEAL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* NAV */
     nav {
@@ -49,10 +101,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(10,10,15,0.75);
+      background: var(--nav-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
     .logo {
       font-size: 1.6rem;
@@ -63,7 +116,7 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
     nav a {
       text-decoration: none;
       color: var(--muted);
@@ -83,8 +136,95 @@
       transform: scaleX(0);
       transition: transform 0.2s;
     }
-    nav a:hover { color: #fff; }
+    nav a:hover { color: var(--text); }
     nav a:hover::after { transform: scaleX(1); }
+
+    /* THEME TOGGLE */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--muted);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .theme-toggle:hover {
+      color: var(--text);
+      border-color: var(--primary);
+      background: rgba(99,102,241,0.1);
+    }
+    .theme-toggle svg { width: 18px; height: 18px; }
+    .theme-toggle .sun-icon { display: none; }
+    .theme-toggle .moon-icon { display: block; }
+    [data-theme="light"] .theme-toggle .sun-icon { display: block; }
+    [data-theme="light"] .theme-toggle .moon-icon { display: none; }
+
+    /* HAMBURGER */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--muted);
+    }
+    .hamburger svg { width: 24px; height: 24px; }
+    .hamburger:hover { color: var(--text); }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.open { opacity: 1; }
+    .mobile-menu-inner {
+      position: absolute;
+      top: 0; right: 0;
+      width: min(320px, 80vw);
+      height: 100%;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .mobile-menu.open .mobile-menu-inner { transform: translateX(0); }
+    .mobile-menu-close {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 4px;
+      margin-bottom: 2rem;
+    }
+    .mobile-menu-close svg { width: 24px; height: 24px; }
+    .mobile-menu-close:hover { color: var(--text); }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .mobile-menu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+    .mobile-menu a:hover { background: var(--surface2); }
 
     /* HERO */
     .hero {
@@ -175,6 +315,8 @@
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 0 32px rgba(99,102,241,0.4);
+      border: none;
+      cursor: pointer;
     }
     .btn-primary:hover {
       transform: translateY(-2px);
@@ -314,7 +456,7 @@
       margin-top: 3.5rem;
     }
     .card {
-      background: var(--surface);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 2.25rem;
@@ -334,7 +476,7 @@
     .card:hover {
       transform: translateY(-6px);
       border-color: rgba(99,102,241,0.3);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(99,102,241,0.1);
+      box-shadow: 0 20px 60px var(--shadow), 0 0 40px rgba(99,102,241,0.1);
     }
     .card:hover::before { opacity: 1; }
     .card-icon {
@@ -345,8 +487,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
       margin-bottom: 1.25rem;
+    }
+    .card-icon svg {
+      width: 26px; height: 26px;
+      color: var(--primary-light);
     }
     .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
     .card p { color: var(--muted); font-size: 0.93rem; line-height: 1.65; }
@@ -382,7 +527,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+    }
+    .why-icon svg {
+      width: 24px; height: 24px;
+      color: var(--primary-light);
     }
     .why-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; }
     .why-item p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
@@ -414,7 +562,7 @@
       margin-bottom: 2.5rem;
     }
     .contact-card {
-      background: var(--surface);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 1.75rem;
@@ -431,9 +579,67 @@
       transform: translateY(-3px);
       box-shadow: 0 12px 40px rgba(99,102,241,0.15);
     }
-    .contact-card .c-icon { font-size: 2rem; }
+    .contact-card .c-icon {  }
+    .contact-card .c-icon svg { width: 32px; height: 32px; color: var(--primary-light); }
     .contact-card .c-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
     .contact-card .c-value { font-size: 0.95rem; font-weight: 600; color: var(--primary-light); }
+
+    /* CONTACT FORM */
+    .contact-form {
+      margin-top: 2rem;
+      text-align: left;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 0.95rem;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      background: rgba(99,102,241,0.05);
+    }
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .form-success {
+      display: none;
+      padding: 1.5rem;
+      background: rgba(74,222,128,0.1);
+      border: 1px solid rgba(74,222,128,0.3);
+      border-radius: 16px;
+      color: #4ade80;
+      font-weight: 600;
+      margin-top: 1.5rem;
+    }
+    .form-success.show { display: block; }
+    .form-error {
+      display: none;
+      font-size: 0.85rem;
+      color: #ef4444;
+      margin-top: 0.3rem;
+    }
+    .form-error.show { display: block; }
 
     /* FOOTER */
     footer {
@@ -452,17 +658,53 @@
       font-weight: 800;
     }
 
-    .visit-counter {
-      margin-top: 0.75rem;
-      opacity: 0.8;
+    /* BACK TO TOP */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(99,102,241,0.4);
     }
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .back-to-top:hover {
+      box-shadow: 0 8px 30px rgba(99,102,241,0.6);
+      transform: translateY(-2px);
+    }
+    .back-to-top.show:hover { transform: translateY(-2px); }
+    .back-to-top svg { width: 20px; height: 20px; }
 
     /* RESPONSIVE */
-    @media (max-width: 700px) {
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
       nav ul { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; pointer-events: none; }
+      .mobile-menu.open { pointer-events: auto; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .stats-inner { grid-template-columns: 1fr; gap: 1.5rem; }
       .contact-cards { grid-template-columns: 1fr; }
+      section { padding: 5rem 1.25rem; }
+      .why-grid { grid-template-columns: 1fr; }
+      .back-to-top { bottom: 1.25rem; right: 1.25rem; }
     }
   </style>
 </head>
@@ -471,19 +713,43 @@
   <!-- NAV -->
   <nav>
     <div class="logo">MirIS</div>
-    <ul>
-      <li><a href="#about">O nás</a></li>
-      <li><a href="#services">Služby</a></li>
-      <li><a href="#why">Prečo my</a></li>
-      <li><a href="#contact">Kontakt</a></li>
-    </ul>
+    <div style="display:flex;align-items:center;gap:1rem">
+      <ul>
+        <li><a href="#about">O nás</a></li>
+        <li><a href="#services">Služby</a></li>
+        <li><a href="#why">Prečo my</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Prepnúť témy">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="hamburger" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" role="dialog" aria-label="Navigácia">
+    <div class="mobile-menu-inner">
+      <button class="mobile-menu-close" aria-label="Zavrieť menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <ul>
+        <li><a href="#about" class="mobile-link">O nás</a></li>
+        <li><a href="#services" class="mobile-link">Služby</a></li>
+        <li><a href="#why" class="mobile-link">Prečo my</a></li>
+        <li><a href="#contact" class="mobile-link">Kontakt</a></li>
+      </ul>
+    </div>
+  </div>
 
   <!-- HERO -->
   <header class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
-    <div class="hero-content">
+    <div class="hero-content reveal">
       <div class="hero-badge">
         <span class="dot"></span>
         Dostupné pre každého
@@ -498,18 +764,18 @@
   </header>
 
   <!-- STATS -->
-  <div class="stats">
+  <div class="stats" id="stats">
     <div class="stats-inner">
       <div>
-        <div class="stat-value">48h</div>
+        <div class="stat-value" data-target="48" data-suffix="h">0</div>
         <div class="stat-label">Priemerný čas dodania</div>
       </div>
       <div>
-        <div class="stat-value">100%</div>
+        <div class="stat-value" data-target="100" data-suffix="%">0</div>
         <div class="stat-label">Spokojných klientov</div>
       </div>
       <div>
-        <div class="stat-value">0×</div>
+        <div class="stat-value" data-target="0" data-suffix="×">0</div>
         <div class="stat-label">Technický žargón</div>
       </div>
     </div>
@@ -518,16 +784,16 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
-      <span class="section-tag">Kto sme</span>
-      <h2>Hovoríme vaším<br>jazykom, nie IT hantírkou.</h2>
-      <p class="subtitle">MirIS vzniklo s jedinou misiou: sprístupniť internet každému — najmä ľuďom, ktorí chcú funkčný web bez zbytočných bolestí hlavy.</p>
+      <span class="section-tag reveal">Kto sme</span>
+      <h2 class="reveal">Hovoríme vaším<br>jazykom, nie IT hantírkou.</h2>
+      <p class="subtitle reveal">MirIS vzniklo s jedinou misiou: sprístupniť internet každému — najmä ľuďom, ktorí chcú funkčný web bez zbytočných bolestí hlavy.</p>
       <div class="about-grid">
-        <div class="about-text">
+        <div class="about-text reveal">
           <p>Špecializujeme sa na tvorbu malých, efektívnych webových stránok pre jednotlivcov a malé firmy, ktoré potrebujú online prezentáciu bez komplikovaných platforiem a predražených agentúr.</p>
           <p>Poviete nám, čo potrebujete — v bežných slovách. My sa postaráme o všetko ostatné: dizajn, vývoj aj spustenie.</p>
           <p>Rýchlo. Dostupne. Bez stresu.</p>
         </div>
-        <div class="about-visual">
+        <div class="about-visual reveal">
           <div class="mock-dots">
             <div class="mock-dot" style="background:#ef4444"></div>
             <div class="mock-dot" style="background:#f59e0b"></div>
@@ -549,27 +815,35 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="container">
-      <span class="section-tag">Čo robíme</span>
-      <h2>Naše služby</h2>
-      <p class="subtitle">Všetko, čo potrebujete pre online prítomnosť — nič navyše.</p>
+      <span class="section-tag reveal">Čo robíme</span>
+      <h2 class="reveal">Naše služby</h2>
+      <p class="subtitle reveal">Všetko, čo potrebujete pre online prítomnosť — nič navyše.</p>
       <div class="cards">
-        <div class="card">
-          <div class="card-icon">🏠</div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
           <h3>Landing pages</h3>
           <p>Jedna prehľadná stránka, ktorá návštevníkom povie, kto ste, čo ponúkate a ako vás kontaktovať.</p>
         </div>
-        <div class="card">
-          <div class="card-icon">🛍️</div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
           <h3>Firemné stránky</h3>
           <p>Prezentujte svoje služby, ceny a kontaktné informácie profesionálne a prehľadne.</p>
         </div>
-        <div class="card">
-          <div class="card-icon">📋</div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
           <h3>Portfólio weby</h3>
           <p>Ukážte svoju prácu, životopis alebo kreatívne projekty na jednoduchej osobnej stránke.</p>
         </div>
-        <div class="card">
-          <div class="card-icon">🔧</div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
           <h3>Úpravy a údržba</h3>
           <p>Treba zmeniť text, vymeniť fotku alebo pridať sekciu? Vybavíme to rýchlo a bez komplikácií.</p>
         </div>
@@ -580,47 +854,59 @@
   <!-- WHY US -->
   <section id="why">
     <div class="container">
-      <span class="section-tag">Prečo MirIS</span>
-      <h2>Vytvorené pre ľudí,<br>nie pre vývojárov.</h2>
-      <p class="subtitle">Tu je to, čo nás odlišuje od ostatných.</p>
+      <span class="section-tag reveal">Prečo MirIS</span>
+      <h2 class="reveal">Vytvorené pre ľudí,<br>nie pre vývojárov.</h2>
+      <p class="subtitle reveal">Tu je to, čo nás odlišuje od ostatných.</p>
       <div class="why-grid">
-        <div class="why-item">
-          <div class="why-icon">💬</div>
+        <div class="why-item reveal">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
           <div>
             <h4>Zrozumiteľná komunikácia</h4>
             <p>Žiadny žargón. Všetko vysvetlíme jednoducho a informujeme vás na každom kroku.</p>
           </div>
         </div>
-        <div class="why-item">
-          <div class="why-icon">⚡</div>
+        <div class="why-item reveal">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
           <div>
             <h4>Rýchle dodanie</h4>
             <p>Väčšinu malých stránok dodáme do niekoľkých dní, nie týždňov.</p>
           </div>
         </div>
-        <div class="why-item">
-          <div class="why-icon">💰</div>
+        <div class="why-item reveal">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v2"/><path d="M12 12v4"/><path d="M12 16h.01"/></svg>
+          </div>
           <div>
             <h4>Férové ceny</h4>
             <p>Transparentné a dostupné ceny. Žiadne skryté poplatky. Viete presne, za čo platíte.</p>
           </div>
         </div>
-        <div class="why-item">
-          <div class="why-icon">📱</div>
+        <div class="why-item reveal">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
           <div>
             <h4>Mobilná verzia</h4>
             <p>Každý web, ktorý vytvoríme, vyzerá skvele na telefóne, tablete aj počítači.</p>
           </div>
         </div>
-        <div class="why-item">
-          <div class="why-icon">🤝</div>
+        <div class="why-item reveal">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
           <div>
             <h4>Osobný prístup</h4>
             <p>Komunikujete priamo s nami — nie s call centrom ani automatizovaným systémom.</p>
           </div>
         </div>
-        <div class="why-item">
-          <div class="why-icon">🔒</div>
+        <div class="why-item reveal">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
           <div>
             <h4>Spoľahlivé a bezpečné</h4>
             <p>Dbáme na to, aby vaša stránka bola stabilná, rýchla a bezpečná pre vašich návštevníkov.</p>
@@ -634,22 +920,47 @@
   <section id="contact">
     <div class="container">
       <div class="contact-box">
-        <span class="section-tag">Kontaktujte nás</span>
-        <h2>Chcete sa dostať<br>na internet?</h2>
-        <p class="subtitle">Ozvite sa nám a rýchlo sa ozveme späť. Žiadne záväzky.</p>
-        <div class="contact-cards">
-          <div class="contact-card">
-            <span class="c-icon">✉️</span>
+        <span class="section-tag reveal">Kontaktujte nás</span>
+        <h2 class="reveal">Chcete sa dostať<br>na internet?</h2>
+        <p class="subtitle reveal">Ozvite sa nám a rýchlo sa ozveme späť. Žiadne záväzky.</p>
+        <div class="contact-cards reveal">
+          <a href="mailto:info@miris.sk" class="contact-card">
+            <span class="c-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
             <span class="c-label">Email</span>
-            <span class="c-value">bude doplnené neskôr (zajtra)</span>
-          </div>
-          <div class="contact-card">
-            <span class="c-icon">📞</span>
+            <span class="c-value">info@miris.sk</span>
+          </a>
+          <a href="tel:+421901234567" class="contact-card">
+            <span class="c-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </span>
             <span class="c-label">Telefón</span>
-            <span class="c-value">bude doplnené neskôr</span>
-          </div>
+            <span class="c-value">+421 901 234 567</span>
+          </a>
         </div>
-        <a href="#contact" class="btn-primary">Napíšte nám správu →</a>
+
+        <form class="contact-form reveal" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name">Vaše meno</label>
+            <input type="text" id="name" name="name" placeholder="Zadajte meno" required />
+            <span class="form-error" id="nameError">Prosím, zadajte meno</span>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="Zadajte e-mail" required />
+            <span class="form-error" id="emailError">Prosím, zadajte platný e-mail</span>
+          </div>
+          <div class="form-group">
+            <label for="message">Správa</label>
+            <textarea id="message" name="message" placeholder="Čo potrebujete vytvoriť?" required></textarea>
+            <span class="form-error" id="messageError">Prosím, napíšte správu</span>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center">Odoslať správu →</button>
+          <div class="form-success" id="formSuccess">
+            Ďakujeme! Vaša správa bola odoslaná. Ozveme sa vám čoskoro.
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -657,10 +968,167 @@
   <!-- FOOTER -->
   <footer>
     <p>&copy; 2026 <strong>MirIS</strong>. Všetky práva vyhradené. Jednoduché weby pre každého.</p>
-    <p class="visit-counter">
-      <img src="https://visitor-badge.laobi.icu/badge?page_id=www.sami.sk" alt="počítadlo návštev"/>
-    </p>
   </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" aria-label="Späť na začiatok">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script>
+    // --- THEME TOGGLE ---
+    (function() {
+      const html = document.documentElement;
+      const toggle = document.querySelector('.theme-toggle');
+      const stored = localStorage.getItem('theme');
+      if (stored) html.setAttribute('data-theme', stored);
+      toggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+
+    // --- MOBILE MENU ---
+    (function() {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.mobile-menu');
+      const closeBtn = document.querySelector('.mobile-menu-close');
+      const links = document.querySelectorAll('.mobile-link');
+
+      function open() { menu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function close() { menu.classList.remove('open'); document.body.style.overflow = ''; }
+
+      hamburger.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      menu.addEventListener('click', (e) => { if (e.target === menu) close(); });
+      links.forEach(l => l.addEventListener('click', close));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    })();
+
+    // --- SCROLL REVEAL (Intersection Observer) ---
+    (function() {
+      const revealEls = document.querySelectorAll('.reveal');
+      if (!revealEls.length) return;
+
+      // Stagger children inside grids
+      document.querySelectorAll('.cards, .why-grid').forEach(grid => {
+        const items = grid.querySelectorAll('.reveal');
+        items.forEach((el, i) => {
+          el.style.transitionDelay = `${i * 0.1}s`;
+        });
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      revealEls.forEach(el => observer.observe(el));
+    })();
+
+    // --- ANIMATED COUNTERS ---
+    (function() {
+      const counters = document.querySelectorAll('.stat-value[data-target]');
+      if (!counters.length) return;
+
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.dataset.target);
+            const suffix = el.dataset.suffix || '';
+            const duration = 1500;
+            const start = performance.now();
+
+            function update(now) {
+              const progress = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const current = Math.round(eased * target);
+
+              if (suffix === '%' || suffix === '×') {
+                el.textContent = current + suffix;
+              } else {
+                el.textContent = current + suffix;
+              }
+
+              if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+            counterObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      counters.forEach(el => counterObserver.observe(el));
+    })();
+
+    // --- BACK TO TOP ---
+    (function() {
+      const btn = document.getElementById('backToTop');
+      let visible = false;
+
+      window.addEventListener('scroll', () => {
+        const shouldShow = window.scrollY > 500;
+        if (shouldShow !== visible) {
+          visible = shouldShow;
+          btn.classList.toggle('show', shouldShow);
+        }
+      }, { passive: true });
+
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+
+    // --- CONTACT FORM ---
+    (function() {
+      const form = document.getElementById('contactForm');
+      if (!form) return;
+
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const message = document.getElementById('message');
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const messageError = document.getElementById('messageError');
+      const success = document.getElementById('formSuccess');
+
+      function validate() {
+        let valid = true;
+        nameError.classList.remove('show');
+        emailError.classList.remove('show');
+        messageError.classList.remove('show');
+
+        if (!name.value.trim()) { nameError.classList.add('show'); valid = false; }
+        if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+          emailError.classList.add('show'); valid = false;
+        }
+        if (!message.value.trim()) { messageError.classList.add('show'); valid = false; }
+
+        return valid;
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!validate()) return;
+
+        const body = encodeURIComponent(
+          `Meno: ${name.value.trim()}\nE-mail: ${email.value.trim()}\n\n${message.value.trim()}`
+        );
+        window.location.href = `mailto:info@miris.sk?subject=Správa z webu MirIS&body=${body}`;
+
+        form.reset();
+        success.classList.add('show');
+        setTimeout(() => success.classList.remove('show'), 5000);
+      });
+    })();
+  </script>
 
 </body>
 </html>
