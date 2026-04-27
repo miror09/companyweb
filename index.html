@@ -75,12 +75,10 @@
       transition: background 0.3s ease, color 0.3s ease;
     }
 
-    /* SCROLLBAR */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
 
-    /* REVEAL ANIMATIONS */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -91,7 +89,6 @@
       transform: translateY(0);
     }
 
-    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -139,7 +136,6 @@
     nav a:hover { color: var(--text); }
     nav a:hover::after { transform: scaleX(1); }
 
-    /* THEME TOGGLE */
     .theme-toggle {
       background: none;
       border: 1px solid var(--border);
@@ -164,7 +160,6 @@
     [data-theme="light"] .theme-toggle .sun-icon { display: block; }
     [data-theme="light"] .theme-toggle .moon-icon { display: none; }
 
-    /* HAMBURGER */
     .hamburger {
       display: none;
       background: none;
@@ -176,7 +171,6 @@
     .hamburger svg { width: 24px; height: 24px; }
     .hamburger:hover { color: var(--text); }
 
-    /* MOBILE MENU */
     .mobile-menu {
       display: none;
       position: fixed;
@@ -226,7 +220,6 @@
     }
     .mobile-menu a:hover { background: var(--surface2); }
 
-    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -341,7 +334,6 @@
       transform: translateY(-2px);
     }
 
-    /* STATS */
     .stats {
       padding: 2rem;
       border-top: 1px solid var(--border);
@@ -367,7 +359,6 @@
     }
     .stat-label { color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem; }
 
-    /* SECTIONS */
     section { padding: 7rem 2rem; }
     .container { max-width: 1100px; margin: 0 auto; }
     .section-tag {
@@ -399,7 +390,6 @@
       line-height: 1.7;
     }
 
-    /* ABOUT */
     #about { background: var(--surface); }
     .about-grid {
       display: grid;
@@ -447,7 +437,6 @@
       width: 12px; height: 12px; border-radius: 50%;
     }
 
-    /* SERVICES */
     #services { background: var(--bg); }
     .cards {
       display: grid;
@@ -496,7 +485,6 @@
     .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
     .card p { color: var(--muted); font-size: 0.93rem; line-height: 1.65; }
 
-    /* WHY US */
     #why { background: var(--surface); }
     .why-grid {
       display: grid;
@@ -535,7 +523,6 @@
     .why-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; }
     .why-item p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
 
-    /* CONTACT */
     #contact {
       background: var(--bg);
       position: relative;
@@ -579,12 +566,10 @@
       transform: translateY(-3px);
       box-shadow: 0 12px 40px rgba(99,102,241,0.15);
     }
-    .contact-card .c-icon {  }
     .contact-card .c-icon svg { width: 32px; height: 32px; color: var(--primary-light); }
     .contact-card .c-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
     .contact-card .c-value { font-size: 0.95rem; font-weight: 600; color: var(--primary-light); }
 
-    /* CONTACT FORM */
     .contact-form {
       margin-top: 2rem;
       text-align: left;
@@ -641,7 +626,6 @@
     }
     .form-error.show { display: block; }
 
-    /* FOOTER */
     footer {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -658,7 +642,6 @@
       font-weight: 800;
     }
 
-    /* BACK TO TOP */
     .back-to-top {
       position: fixed;
       bottom: 2rem;
@@ -692,7 +675,6 @@
     .back-to-top.show:hover { transform: translateY(-2px); }
     .back-to-top svg { width: 20px; height: 20px; }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 1.25rem; }
       nav ul { display: none; }
@@ -710,7 +692,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="logo">MirIS</div>
     <div style="display:flex;align-items:center;gap:1rem">
@@ -730,7 +711,6 @@
     </div>
   </nav>
 
-  <!-- MOBILE MENU -->
   <div class="mobile-menu" role="dialog" aria-label="Navigácia">
     <div class="mobile-menu-inner">
       <button class="mobile-menu-close" aria-label="Zavrieť menu">
@@ -745,7 +725,6 @@
     </div>
   </div>
 
-  <!-- HERO -->
   <header class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
@@ -763,7 +742,6 @@
     </div>
   </header>
 
-  <!-- STATS -->
   <div class="stats" id="stats">
     <div class="stats-inner">
       <div>
@@ -781,7 +759,6 @@
     </div>
   </div>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="container">
       <span class="section-tag reveal">Kto sme</span>
@@ -812,7 +789,6 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
   <section id="services">
     <div class="container">
       <span class="section-tag reveal">Čo robíme</span>
@@ -851,7 +827,6 @@
     </div>
   </section>
 
-  <!-- WHY US -->
   <section id="why">
     <div class="container">
       <span class="section-tag reveal">Prečo MirIS</span>
@@ -916,7 +891,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <div class="contact-box">
@@ -965,18 +939,15 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <p>&copy; 2026 <strong>MirIS</strong>. Všetky práva vyhradené. Jednoduché weby pre každého.</p>
   </footer>
 
-  <!-- BACK TO TOP -->
   <button class="back-to-top" id="backToTop" aria-label="Späť na začiatok">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
 
   <script>
-    // --- THEME TOGGLE ---
     (function() {
       const html = document.documentElement;
       const toggle = document.querySelector('.theme-toggle');
@@ -990,7 +961,6 @@
       });
     })();
 
-    // --- MOBILE MENU ---
     (function() {
       const hamburger = document.querySelector('.hamburger');
       const menu = document.querySelector('.mobile-menu');
@@ -1007,12 +977,10 @@
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
     })();
 
-    // --- SCROLL REVEAL (Intersection Observer) ---
     (function() {
       const revealEls = document.querySelectorAll('.reveal');
       if (!revealEls.length) return;
 
-      // Stagger children inside grids
       document.querySelectorAll('.cards, .why-grid').forEach(grid => {
         const items = grid.querySelectorAll('.reveal');
         items.forEach((el, i) => {
@@ -1032,7 +1000,6 @@
       revealEls.forEach(el => observer.observe(el));
     })();
 
-    // --- ANIMATED COUNTERS ---
     (function() {
       const counters = document.querySelectorAll('.stat-value[data-target]');
       if (!counters.length) return;
@@ -1050,13 +1017,7 @@
               const progress = Math.min((now - start) / duration, 1);
               const eased = 1 - Math.pow(1 - progress, 3);
               const current = Math.round(eased * target);
-
-              if (suffix === '%' || suffix === '×') {
-                el.textContent = current + suffix;
-              } else {
-                el.textContent = current + suffix;
-              }
-
+              el.textContent = current + suffix;
               if (progress < 1) requestAnimationFrame(update);
             }
             requestAnimationFrame(update);
@@ -1068,7 +1029,6 @@
       counters.forEach(el => counterObserver.observe(el));
     })();
 
-    // --- BACK TO TOP ---
     (function() {
       const btn = document.getElementById('backToTop');
       let visible = false;
@@ -1086,7 +1046,6 @@
       });
     })();
 
-    // --- CONTACT FORM ---
     (function() {
       const form = document.getElementById('contactForm');
       if (!form) return;
