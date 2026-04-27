@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MirIS – Jednoduché weby pre každého</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --primary-light: #a5b4fc;
+      --accent: #f59e0b;
+      --accent2: #ec4899;
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a2e;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --border: rgba(255,255,255,0.07);
+      --glow: rgba(99,102,241,0.35);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10,10,15,0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #a5b4fc, #818cf8, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 99px;
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+    nav a:hover { color: #fff; }
+    nav a:hover::after { transform: scaleX(1); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.3) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(236,72,153,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 10% 70%, rgba(99,102,241,0.1) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 820px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.3);
+      color: var(--primary-light);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-radius: 99px;
+      padding: 0.35rem 1rem;
+      margin-bottom: 2rem;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #4ade80;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(135deg, #818cf8 0%, #a78bfa 40%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 3rem;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2.25rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent2));
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 32px rgba(99,102,241,0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 48px rgba(99,102,241,0.6);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2.25rem;
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* STATS */
+    .stats {
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #818cf8, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem; }
+
+    /* SECTIONS */
+    section { padding: 7rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.25);
+      color: var(--primary-light);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 99px;
+      padding: 0.3rem 0.9rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* ABOUT */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 4rem;
+    }
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1.1rem;
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+    .about-visual {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(236,72,153,0.1));
+      border: 1px solid var(--border);
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .mock-bar {
+      height: 10px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+    .mock-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--primary), var(--accent2));
+    }
+    .mock-block {
+      height: 60px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+    }
+    .mock-dots { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .mock-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+    }
+
+    /* SERVICES */
+    #services { background: var(--bg); }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.25rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99,102,241,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(99,102,241,0.1);
+    }
+    .card:hover::before { opacity: 1; }
+    .card-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+    }
+    .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .card p { color: var(--muted); font-size: 0.93rem; line-height: 1.65; }
+
+    /* WHY US */
+    #why { background: var(--surface); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .why-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .why-item:hover {
+      border-color: rgba(99,102,241,0.3);
+      transform: translateY(-3px);
+    }
+    .why-icon {
+      flex-shrink: 0;
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(236,72,153,0.15));
+      border: 1px solid rgba(99,102,241,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+    .why-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .why-item p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    /* CONTACT */
+    #contact {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(99,102,241,0.2) 0%, transparent 70%);
+    }
+    .contact-box {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact-box .subtitle { margin: 0 auto 3rem; }
+    .contact-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .contact-card:hover {
+      border-color: rgba(99,102,241,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(99,102,241,0.15);
+    }
+    .contact-card .c-icon { font-size: 2rem; }
+    .contact-card .c-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+    .contact-card .c-value { font-size: 0.95rem; font-weight: 600; color: var(--primary-light); }
+
+    /* FOOTER */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+    footer strong {
+      background: linear-gradient(135deg, #818cf8, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      nav ul { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stats-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .contact-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">MirIS</div>
+    <ul>
+      <li><a href="#about">O nás</a></li>
+      <li><a href="#services">Služby</a></li>
+      <li><a href="#why">Prečo my</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Dostupné pre každého
+      </div>
+      <h1>Webové stránky<br>pre <span class="grad">bežných ľudí</span></h1>
+      <p>MirIS vytvára jednoduché, prehľadné a cenovo dostupné weby — bez technických znalostí na vašej strane.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Získajte svoju stránku →</a>
+        <a href="#services" class="btn-secondary">Zistiť viac</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stats-inner">
+      <div>
+        <div class="stat-value">48h</div>
+        <div class="stat-label">Priemerný čas dodania</div>
+      </div>
+      <div>
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Spokojných klientov</div>
+      </div>
+      <div>
+        <div class="stat-value">0×</div>
+        <div class="stat-label">Technický žargón</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <span class="section-tag">Kto sme</span>
+      <h2>Hovoríme vaším<br>jazykom, nie IT hantírkou.</h2>
+      <p class="subtitle">MirIS vzniklo s jedinou misiou: sprístupniť internet každému — najmä ľuďom, ktorí chcú funkčný web bez zbytočných bolestí hlavy.</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Špecializujeme sa na tvorbu malých, efektívnych webových stránok pre jednotlivcov a malé firmy, ktoré potrebujú online prezentáciu bez komplikovaných platforiem a predražených agentúr.</p>
+          <p>Poviete nám, čo potrebujete — v bežných slovách. My sa postaráme o všetko ostatné: dizajn, vývoj aj spustenie.</p>
+          <p>Rýchlo. Dostupne. Bez stresu.</p>
+        </div>
+        <div class="about-visual">
+          <div class="mock-dots">
+            <div class="mock-dot" style="background:#ef4444"></div>
+            <div class="mock-dot" style="background:#f59e0b"></div>
+            <div class="mock-dot" style="background:#22c55e"></div>
+          </div>
+          <div class="mock-bar"><div class="mock-bar-fill" style="width:70%"></div></div>
+          <div class="mock-block"></div>
+          <div class="mock-bar"><div class="mock-bar-fill" style="width:45%"></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+            <div class="mock-block" style="height:40px"></div>
+            <div class="mock-block" style="height:40px"></div>
+          </div>
+          <div class="mock-bar"><div class="mock-bar-fill" style="width:88%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <span class="section-tag">Čo robíme</span>
+      <h2>Naše služby</h2>
+      <p class="subtitle">Všetko, čo potrebujete pre online prítomnosť — nič navyše.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🏠</div>
+          <h3>Landing pages</h3>
+          <p>Jedna prehľadná stránka, ktorá návštevníkom povie, kto ste, čo ponúkate a ako vás kontaktovať.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛍️</div>
+          <h3>Firemné stránky</h3>
+          <p>Prezentujte svoje služby, ceny a kontaktné informácie profesionálne a prehľadne.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <h3>Portfólio weby</h3>
+          <p>Ukážte svoju prácu, životopis alebo kreatívne projekty na jednoduchej osobnej stránke.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔧</div>
+          <h3>Úpravy a údržba</h3>
+          <p>Treba zmeniť text, vymeniť fotku alebo pridať sekciu? Vybavíme to rýchlo a bez komplikácií.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why">
+    <div class="container">
+      <span class="section-tag">Prečo MirIS</span>
+      <h2>Vytvorené pre ľudí,<br>nie pre vývojárov.</h2>
+      <p class="subtitle">Tu je to, čo nás odlišuje od ostatných.</p>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">💬</div>
+          <div>
+            <h4>Zrozumiteľná komunikácia</h4>
+            <p>Žiadny žargón. Všetko vysvetlíme jednoducho a informujeme vás na každom kroku.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">⚡</div>
+          <div>
+            <h4>Rýchle dodanie</h4>
+            <p>Väčšinu malých stránok dodáme do niekoľkých dní, nie týždňov.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">💰</div>
+          <div>
+            <h4>Férové ceny</h4>
+            <p>Transparentné a dostupné ceny. Žiadne skryté poplatky. Viete presne, za čo platíte.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">📱</div>
+          <div>
+            <h4>Mobilná verzia</h4>
+            <p>Každý web, ktorý vytvoríme, vyzerá skvele na telefóne, tablete aj počítači.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🤝</div>
+          <div>
+            <h4>Osobný prístup</h4>
+            <p>Komunikujete priamo s nami — nie s call centrom ani automatizovaným systémom.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🔒</div>
+          <div>
+            <h4>Spoľahlivé a bezpečné</h4>
+            <p>Dbáme na to, aby vaša stránka bola stabilná, rýchla a bezpečná pre vašich návštevníkov.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <span class="section-tag">Kontaktujte nás</span>
+        <h2>Chcete sa dostať<br>na internet?</h2>
+        <p class="subtitle">Ozvite sa nám a rýchlo sa ozveme späť. Žiadne záväzky.</p>
+        <div class="contact-cards">
+          <a href="mailto:hello@miris.sk" class="contact-card">
+            <span class="c-icon">✉️</span>
+            <span class="c-label">Email</span>
+            <span class="c-value">hello@miris.sk</span>
+          </a>
+          <a href="tel:+421900000000" class="contact-card">
+            <span class="c-icon">📞</span>
+            <span class="c-label">Telefón</span>
+            <span class="c-value">+421 900 000 000</span>
+          </a>
+        </div>
+        <a href="mailto:hello@miris.sk" class="btn-primary">Napíšte nám správu →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 <strong>MirIS</strong>. Všetky práva vyhradené. Jednoduché weby pre každého.</p>
+  </footer>
+
+</body>
+</html>
