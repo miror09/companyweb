@@ -1062,20 +1062,43 @@
       var msg = input.value.trim();
       if (!msg) return;
 
+      if (msg.length > 500) {
+        out.innerHTML += '<p style="color:var(--accent)"><b>Správa:</b> Príliš dlhá (max 500 znakov).</p>';
+        out.scrollTop = out.scrollHeight;
+        return;
+      }
+
       out.innerHTML += '<p><b>Ty:</b> ' + msg.replace(/</g, '&lt;') + '</p>';
       input.value = '';
       out.scrollTop = out.scrollHeight;
+
+      var controller = new AbortController();
+      var timeout = setTimeout(function() { controller.abort(); }, 3000);
 
       try {
         var res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: msg })
+          body: JSON.stringify({ message: msg }),
+          signal: controller.signal
         });
+        clearTimeout(timeout);
+
+        if (!res.ok) {
+          var errData = await res.json().catch(function(){ return {}; });
+          out.innerHTML += '<p><b>AI:</b> ' + (errData.error || 'Chyba ' + res.status) + '</p>';
+          out.scrollTop = out.scrollHeight;
+          return;
+        }
+
         var data = await res.json();
         out.innerHTML += '<p><b>AI:</b> ' + (data.response || '…') + '</p>';
       } catch(e) {
-        out.innerHTML += '<p><b>AI:</b> Nedá sa pripojiť k serveru.</p>';
+        if (e.name === 'AbortError') {
+          out.innerHTML += '<p><b>AI:</b> Server neodpovedá (timeout 3s).</p>';
+        } else {
+          out.innerHTML += '<p><b>AI:</b> Nedá sa pripojiť k serveru.</p>';
+        }
       }
       out.scrollTop = out.scrollHeight;
     }
