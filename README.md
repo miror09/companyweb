@@ -31,11 +31,14 @@ Toto je statický HTML landing page vytvorený pre prezentáciu služieb webové
 - Google Fonts (Inter)
 - CSS custom properties
 - Moderné CSS techniky (backdrop-filter, gradienty, animácie)
+- SVG favicon
+- Meta description pre SEO
 
 ## Štruktúra súborov
 
 ```
 /root/project1/
+├── favicon.svg   # Favicon (SVG)
 ├── index.html    # Hlavný landing page
 └── README.md     # Táto dokumentácia
 ```
