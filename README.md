@@ -19,10 +19,11 @@ Toto je statický HTML landing page vytvorený pre prezentáciu služieb webové
 - Moderný tmavý dizajn s gradientmi
 - Plynulé animácie a prechody
 - Rýchle načítanie (žiadne frameworky)
-- Interaktívne prvky (hamburger menu, theme toggle)
+- Interaktívne prvky (hamburger menu, theme toggle, language switcher)
 - PWA ready
 - Kontaktný formulár
 - Počítadlo návštev
+- SK/EN prepínač jazyka s persistentným ukladaním
 
 ## Technológie
 
@@ -33,6 +34,7 @@ Toto je statický HTML landing page vytvorený pre prezentáciu služieb webové
 - Moderné CSS techniky (backdrop-filter, gradienty, animácie)
 - SVG favicon
 - Meta description pre SEO
+- JavaScript i18n lokalizácia (SK/EN)
 
 ## Štruktúra súborov
 
@@ -46,6 +48,10 @@ Toto je statický HTML landing page vytvorený pre prezentáciu služieb webové
 ## Zobrazenie
 
 Otvorte `index.html` v prehliadači pre zobrazenie landing page.
+
+## Lokalizácia
+
+Web podporuje **slovenský** a **anglický** jazyk. Prepínač jazyka sa nachádza v navigačnom paneli (tlačidlo `SK`/`EN`). Voľba jazyka sa ukladá do `localStorage`. Preklady sú definované v JavaScript objekte `i18n` priamo v `index.html`.
 
 ## Aktualizácie
 

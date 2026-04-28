@@ -133,6 +133,28 @@
       border-color: var(--primary);
       background: rgba(99,102,241,0.1);
     }
+    .lang-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      height: 36px;
+      padding: 0 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: var(--font);
+      letter-spacing: 0.5px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .lang-toggle:hover {
+      color: var(--text);
+      border-color: var(--primary);
+      background: rgba(99,102,241,0.1);
+    }
     .theme-toggle svg { width: 18px; height: 18px; }
     .theme-toggle .sun-icon { display: none; }
     .theme-toggle .moon-icon { display: block; }
@@ -526,11 +548,12 @@
     <div class="logo">MirIS</div>
     <div style="display:flex;align-items:center;gap:1rem">
       <ul>
-        <li><a href="#about">O nás</a></li>
-        <li><a href="#services">Služby</a></li>
-        <li><a href="#why">Prečo my</a></li>
-        <li><a href="#contact">Kontakt</a></li>
+        <li><a href="#about" data-i18n="nav.about">O nás</a></li>
+        <li><a href="#services" data-i18n="nav.services">Služby</a></li>
+        <li><a href="#why" data-i18n="nav.why">Prečo my</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
       </ul>
+      <button class="lang-toggle" data-lang="sk">SK</button>
       <button class="theme-toggle" aria-label="Prepnúť tému">
         <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -545,13 +568,13 @@
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
-        Dostupné pre každého
+        <span data-i18n="hero.badge">Dostupné pre každého</span>
       </div>
-      <h1>Webové stránky<br>pre <span class="grad">bežných ľudí</span></h1>
-      <p>MirIS vytvára jednoduché, prehľadné a cenovo dostupné weby — bez technických znalostí na vašej strane.</p>
+      <h1 data-i18n="hero.title">Webové stránky<br>pre <span class="grad">bežných ľudí</span></h1>
+      <p data-i18n="hero.desc">MirIS vytvára jednoduché, prehľadné a cenovo dostupné weby — bez technických znalostí na vašej strane.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Získajte svoju stránku →</a>
-        <a href="#services" class="btn-secondary">Zistiť viac</a>
+        <a href="#contact" class="btn-primary" data-i18n="hero.cta">Získajte svoju stránku →</a>
+        <a href="#services" class="btn-secondary" data-i18n="hero.learn">Zistiť viac</a>
       </div>
     </div>
   </header>
@@ -561,15 +584,15 @@
     <div class="stats-inner">
       <div>
         <div class="stat-value">48h</div>
-        <div class="stat-label">Priemerný čas dodania</div>
+        <div class="stat-label" data-i18n="stat.time">Priemerný čas dodania</div>
       </div>
       <div>
         <div class="stat-value">100%</div>
-        <div class="stat-label">Spokojných klientov</div>
+        <div class="stat-label" data-i18n="stat.clients">Spokojných klientov</div>
       </div>
       <div>
         <div class="stat-value">0×</div>
-        <div class="stat-label">Technický žargón</div>
+        <div class="stat-label" data-i18n="stat.jargon">Technický žargón</div>
       </div>
     </div>
   </div>
@@ -577,14 +600,14 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
-      <span class="section-tag">Kto sme</span>
-      <h2>Hovoríme vaším<br>jazykom, nie IT hantírkou.</h2>
-      <p class="subtitle">MirIS vzniklo s jedinou misiou: sprístupniť internet každému — najmä ľuďom, ktorí chcú funkčný web bez zbytočných bolestí hlavy.</p>
+      <span class="section-tag" data-i18n="about.tag">Kto sme</span>
+      <h2 data-i18n="about.title">Hovoríme vaším<br>jazykom, nie IT hantírkou.</h2>
+      <p class="subtitle" data-i18n="about.subtitle">MirIS vzniklo s jedinou misiou: sprístupniť internet každému — najmä ľuďom, ktorí chcú funkčný web bez zbytočných bolestí hlavy.</p>
       <div class="about-grid">
         <div class="about-text">
-          <p>Špecializujeme sa na tvorbu malých, efektívnych webových stránok pre jednotlivcov a malé firmy, ktoré potrebujú online prezentáciu bez komplikovaných platforiem a predražených agentúr.</p>
-          <p>Poviete nám, čo potrebujete — v bežných slovách. My sa postaráme o všetko ostatné: dizajn, vývoj aj spustenie.</p>
-          <p>Rýchlo. Dostupne. Bez stresu.</p>
+          <p data-i18n="about.p1">Špecializujeme sa na tvorbu malých, efektívnych webových stránok pre jednotlivcov a malé firmy, ktoré potrebujú online prezentáciu bez komplikovaných platforiem a predražených agentúr.</p>
+          <p data-i18n="about.p2">Poviete nám, čo potrebujete — v bežných slovách. My sa postaráme o všetko ostatné: dizajn, vývoj aj spustenie.</p>
+          <p data-i18n="about.p3">Rýchlo. Dostupne. Bez stresu.</p>
         </div>
         <div class="about-visual">
           <div class="mock-dots">
@@ -608,29 +631,29 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="container">
-      <span class="section-tag">Čo robíme</span>
-      <h2>Naše služby</h2>
-      <p class="subtitle">Všetko, čo potrebujete pre online prítomnosť — nič navyše.</p>
+      <span class="section-tag" data-i18n="services.tag">Čo robíme</span>
+      <h2 data-i18n="services.title">Naše služby</h2>
+      <p class="subtitle" data-i18n="services.subtitle">Všetko, čo potrebujete pre online prítomnosť — nič navyše.</p>
       <div class="cards">
         <div class="card">
           <div class="card-icon">🏠</div>
-          <h3>Landing pages</h3>
-          <p>Jedna prehľadná stránka, ktorá návštevníkom povie, kto ste, čo ponúkate a ako vás kontaktovať.</p>
+          <h3 data-i18n="services.card1.title">Landing pages</h3>
+          <p data-i18n="services.card1.desc">Jedna prehľadná stránka, ktorá návštevníkom povie, kto ste, čo ponúkate a ako vás kontaktovať.</p>
         </div>
         <div class="card">
           <div class="card-icon">🛍️</div>
-          <h3>Firemné stránky</h3>
-          <p>Prezentujte svoje služby, ceny a kontaktné informácie profesionálne a prehľadne.</p>
+          <h3 data-i18n="services.card2.title">Firemné stránky</h3>
+          <p data-i18n="services.card2.desc">Prezentujte svoje služby, ceny a kontaktné informácie profesionálne a prehľadne.</p>
         </div>
         <div class="card">
           <div class="card-icon">📋</div>
-          <h3>Portfólio weby</h3>
-          <p>Ukážte svoju prácu, životopis alebo kreatívne projekty na jednoduchej osobnej stránke.</p>
+          <h3 data-i18n="services.card3.title">Portfólio weby</h3>
+          <p data-i18n="services.card3.desc">Ukážte svoju prácu, životopis alebo kreatívne projekty na jednoduchej osobnej stránke.</p>
         </div>
         <div class="card">
           <div class="card-icon">🔧</div>
-          <h3>Úpravy a údržba</h3>
-          <p>Treba zmeniť text, vymeniť fotku alebo pridať sekciu? Vybavíme to rýchlo a bez komplikácií.</p>
+          <h3 data-i18n="services.card4.title">Úpravy a údržba</h3>
+          <p data-i18n="services.card4.desc">Treba zmeniť text, vymeniť fotku alebo pridať sekciu? Vybavíme to rýchlo a bez komplikácií.</p>
         </div>
       </div>
     </div>
@@ -639,50 +662,50 @@
   <!-- WHY US -->
   <section id="why">
     <div class="container">
-      <span class="section-tag">Prečo MirIS</span>
-      <h2>Vytvorené pre ľudí,<br>nie pre vývojárov.</h2>
-      <p class="subtitle">Tu je to, čo nás odlišuje od ostatných.</p>
+      <span class="section-tag" data-i18n="why.tag">Prečo MirIS</span>
+      <h2 data-i18n="why.title">Vytvorené pre ľudí,<br>nie pre vývojárov.</h2>
+      <p class="subtitle" data-i18n="why.subtitle">Tu je to, čo nás odlišuje od ostatných.</p>
       <div class="why-grid">
         <div class="why-item">
           <div class="why-icon">💬</div>
           <div>
-            <h4>Zrozumiteľná komunikácia</h4>
-            <p>Žiadny žargón. Všetko vysvetlíme jednoducho a informujeme vás na každom kroku.</p>
+            <h4 data-i18n="why.item1.title">Zrozumiteľná komunikácia</h4>
+            <p data-i18n="why.item1.desc">Žiadny žargón. Všetko vysvetlíme jednoducho a informujeme vás na každom kroku.</p>
           </div>
         </div>
         <div class="why-item">
           <div class="why-icon">⚡</div>
           <div>
-            <h4>Rýchle dodanie</h4>
-            <p>Väčšinu malých stránok dodáme do niekoľkých dní, nie týždňov.</p>
+            <h4 data-i18n="why.item2.title">Rýchle dodanie</h4>
+            <p data-i18n="why.item2.desc">Väčšinu malých stránok dodáme do niekoľkých dní, nie týždňov.</p>
           </div>
         </div>
         <div class="why-item">
           <div class="why-icon">💰</div>
           <div>
-            <h4>Férové ceny</h4>
-            <p>Transparentné a dostupné ceny. Žiadne skryté poplatky. Viete presne, za čo platíte.</p>
+            <h4 data-i18n="why.item3.title">Férové ceny</h4>
+            <p data-i18n="why.item3.desc">Transparentné a dostupné ceny. Žiadne skryté poplatky. Viete presne, za čo platíte.</p>
           </div>
         </div>
         <div class="why-item">
           <div class="why-icon">📱</div>
           <div>
-            <h4>Mobilná verzia</h4>
-            <p>Každý web, ktorý vytvoríme, vyzerá skvele na telefóne, tablete aj počítači.</p>
+            <h4 data-i18n="why.item4.title">Mobilná verzia</h4>
+            <p data-i18n="why.item4.desc">Každý web, ktorý vytvoríme, vyzerá skvele na telefóne, tablete aj počítači.</p>
           </div>
         </div>
         <div class="why-item">
           <div class="why-icon">🤝</div>
           <div>
-            <h4>Osobný prístup</h4>
-            <p>Komunikujete priamo s nami — nie s call centrom ani automatizovaným systémom.</p>
+            <h4 data-i18n="why.item5.title">Osobný prístup</h4>
+            <p data-i18n="why.item5.desc">Komunikujete priamo s nami — nie s call centrom ani automatizovaným systémom.</p>
           </div>
         </div>
         <div class="why-item">
           <div class="why-icon">🔒</div>
           <div>
-            <h4>Spoľahlivé a bezpečné</h4>
-            <p>Dbáme na to, aby vaša stránka bola stabilná, rýchla a bezpečná pre vašich návštevníkov.</p>
+            <h4 data-i18n="why.item6.title">Spoľahlivé a bezpečné</h4>
+            <p data-i18n="why.item6.desc">Dbáme na to, aby vaša stránka bola stabilná, rýchla a bezpečná pre vašich návštevníkov.</p>
           </div>
         </div>
       </div>
@@ -693,29 +716,29 @@
   <section id="contact">
     <div class="container">
       <div class="contact-box">
-        <span class="section-tag">Kontaktujte nás</span>
-        <h2>Chcete sa dostať<br>na internet?</h2>
-        <p class="subtitle">Ozvite sa nám a rýchlo sa ozveme späť. Žiadne záväzky.</p>
+        <span class="section-tag" data-i18n="contact.tag">Kontaktujte nás</span>
+        <h2 data-i18n="contact.title">Chcete sa dostať<br>na internet?</h2>
+        <p class="subtitle" data-i18n="contact.subtitle">Ozvite sa nám a rýchlo sa ozveme späť. Žiadne záväzky.</p>
         <div class="contact-cards">
           <div class="contact-card">
             <span class="c-icon">✉️</span>
-            <span class="c-label">Email</span>
+            <span class="c-label" data-i18n="contact.email.label">Email</span>
             <span class="c-value">bude doplnené neskôr (zajtra)</span>
           </div>
           <div class="contact-card">
             <span class="c-icon">📞</span>
-            <span class="c-label">Telefón</span>
+            <span class="c-label" data-i18n="contact.phone.label">Telefón</span>
             <span class="c-value">bude doplnené neskôr</span>
           </div>
         </div>
-        <a href="#contact" class="btn-primary">Napíšte nám správu →</a>
+        <a href="#contact" class="btn-primary" data-i18n="contact.cta">Napíšte nám správu →</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 <strong>MirIS</strong>. Všetky práva vyhradené. Jednoduché weby pre každého.</p>
+    <p data-i18n="footer.text">&copy; 2026 <strong>MirIS</strong>. Všetky práva vyhradené. Jednoduché weby pre každého.</p>
     <p class="visit-counter">
       <img src="https://visitor-badge.laobi.icu/badge?page_id=www.sami.sk" alt="počítadlo návštev"/>
     </p>
@@ -723,16 +746,162 @@
 
 <script>
     (function() {
-      const html = document.documentElement;
-      const toggle = document.querySelector('.theme-toggle');
-      const stored = localStorage.getItem('theme');
-      if (stored) html.setAttribute('data-theme', stored);
-      toggle.addEventListener('click', function() {
-        var current = html.getAttribute('data-theme');
-        var next = current === 'dark' ? 'light' : 'dark';
+      var html = document.documentElement;
+
+      // Theme toggle
+      var themeToggle = document.querySelector('.theme-toggle');
+      var storedTheme = localStorage.getItem('theme');
+      if (storedTheme) html.setAttribute('data-theme', storedTheme);
+      themeToggle.addEventListener('click', function() {
+        var cur = html.getAttribute('data-theme');
+        var next = cur === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
       });
+
+      // i18n
+      var i18n = {
+        sk: {
+          'nav.about': 'O nás',
+          'nav.services': 'Služby',
+          'nav.why': 'Prečo my',
+          'nav.contact': 'Kontakt',
+          'hero.badge': 'Dostupné pre každého',
+          'hero.title': 'Webové stránky<br>pre <span class="grad">bežných ľudí</span>',
+          'hero.desc': 'MirIS vytvára jednoduché, prehľadné a cenovo dostupné weby — bez technických znalostí na vašej strane.',
+          'hero.cta': 'Získajte svoju stránku →',
+          'hero.learn': 'Zistiť viac',
+          'stat.time': 'Priemerný čas dodania',
+          'stat.clients': 'Spokojných klientov',
+          'stat.jargon': 'Technický žargón',
+          'about.tag': 'Kto sme',
+          'about.title': 'Hovoríme vaším<br>jazykom, nie IT hantírkou.',
+          'about.subtitle': 'MirIS vzniklo s jedinou misiou: sprístupniť internet každému — najmä ľuďom, ktorí chcú funkčný web bez zbytočných bolestí hlavy.',
+          'about.p1': 'Špecializujeme sa na tvorbu malých, efektívnych webových stránok pre jednotlivcov a malé firmy, ktoré potrebujú online prezentáciu bez komplikovaných platforiem a predražených agentúr.',
+          'about.p2': 'Poviete nám, čo potrebujete — v bežných slovách. My sa postaráme o všetko ostatné: dizajn, vývoj aj spustenie.',
+          'about.p3': 'Rýchlo. Dostupne. Bez stresu.',
+          'services.tag': 'Čo robíme',
+          'services.title': 'Naše služby',
+          'services.subtitle': 'Všetko, čo potrebujete pre online prítomnosť — nič navyše.',
+          'services.card1.title': 'Landing pages',
+          'services.card1.desc': 'Jedna prehľadná stránka, ktorá návštevníkom povie, kto ste, čo ponúkate a ako vás kontaktovať.',
+          'services.card2.title': 'Firemné stránky',
+          'services.card2.desc': 'Prezentujte svoje služby, ceny a kontaktné informácie profesionálne a prehľadne.',
+          'services.card3.title': 'Portfólio weby',
+          'services.card3.desc': 'Ukážte svoju prácu, životopis alebo kreatívne projekty na jednoduchej osobnej stránke.',
+          'services.card4.title': 'Úpravy a údržba',
+          'services.card4.desc': 'Treba zmeniť text, vymeniť fotku alebo pridať sekciu? Vybavíme to rýchlo a bez komplikácií.',
+          'why.tag': 'Prečo MirIS',
+          'why.title': 'Vytvorené pre ľudí,<br>nie pre vývojárov.',
+          'why.subtitle': 'Tu je to, čo nás odlišuje od ostatných.',
+          'why.item1.title': 'Zrozumiteľná komunikácia',
+          'why.item1.desc': 'Žiadny žargón. Všetko vysvetlíme jednoducho a informujeme vás na každom kroku.',
+          'why.item2.title': 'Rýchle dodanie',
+          'why.item2.desc': 'Väčšinu malých stránok dodáme do niekoľkých dní, nie týždňov.',
+          'why.item3.title': 'Férové ceny',
+          'why.item3.desc': 'Transparentné a dostupné ceny. Žiadne skryté poplatky. Viete presne, za čo platíte.',
+          'why.item4.title': 'Mobilná verzia',
+          'why.item4.desc': 'Každý web, ktorý vytvoríme, vyzerá skvele na telefóne, tablete aj počítači.',
+          'why.item5.title': 'Osobný prístup',
+          'why.item5.desc': 'Komunikujete priamo s nami — nie s call centrom ani automatizovaným systémom.',
+          'why.item6.title': 'Spoľahlivé a bezpečné',
+          'why.item6.desc': 'Dbáme na to, aby vaša stránka bola stabilná, rýchla a bezpečná pre vašich návštevníkov.',
+          'contact.tag': 'Kontaktujte nás',
+          'contact.title': 'Chcete sa dostať<br>na internet?',
+          'contact.subtitle': 'Ozvite sa nám a rýchlo sa ozveme späť. Žiadne záväzky.',
+          'contact.email.label': 'Email',
+          'contact.phone.label': 'Telefón',
+          'contact.cta': 'Napíšte nám správu →',
+          'footer.text': '&copy; 2026 <strong>MirIS</strong>. Všetky práva vyhradené. Jednoduché weby pre každého.',
+          'meta.title': 'MirIS – Jednoduché weby pre každého',
+          'meta.desc': 'MirIS – Jednoduché a profesionálne webové stránky pre malé podniky a jednotlivcov. Landing pages, firemné stránky, portfólio a údržba webov.'
+        },
+        en: {
+          'nav.about': 'About',
+          'nav.services': 'Services',
+          'nav.why': 'Why Us',
+          'nav.contact': 'Contact',
+          'hero.badge': 'Available for everyone',
+          'hero.title': 'Websites<br>for <span class="grad">everyday people</span>',
+          'hero.desc': 'MirIS creates simple, clear and affordable websites — no technical knowledge needed on your end.',
+          'hero.cta': 'Get your site →',
+          'hero.learn': 'Learn more',
+          'stat.time': 'Average delivery time',
+          'stat.clients': 'Happy clients',
+          'stat.jargon': 'Tech jargon',
+          'about.tag': 'Who we are',
+          'about.title': 'We speak your<br>language, not tech jargon.',
+          'about.subtitle': 'MirIS was founded with a single mission: to make the internet accessible to everyone — especially people who want a functional website without unnecessary headaches.',
+          'about.p1': 'We specialize in creating small, efficient websites for individuals and small businesses that need an online presence without complicated platforms or overpriced agencies.',
+          'about.p2': 'Tell us what you need — in plain words. We\'ll handle everything else: design, development, and launch.',
+          'about.p3': 'Fast. Affordable. Stress-free.',
+          'services.tag': 'What we do',
+          'services.title': 'Our services',
+          'services.subtitle': 'Everything you need for an online presence — nothing extra.',
+          'services.card1.title': 'Landing pages',
+          'services.card1.desc': 'A single clear page that tells visitors who you are, what you offer, and how to contact you.',
+          'services.card2.title': 'Company websites',
+          'services.card2.desc': 'Present your services, prices, and contact info professionally and clearly.',
+          'services.card3.title': 'Portfolio websites',
+          'services.card3.desc': 'Showcase your work, résumé, or creative projects on a simple personal page.',
+          'services.card4.title': 'Edits & maintenance',
+          'services.card4.desc': 'Need to change text, swap a photo, or add a section? We\'ll handle it quickly and hassle-free.',
+          'why.tag': 'Why MirIS',
+          'why.title': 'Made for people,<br>not for developers.',
+          'why.subtitle': 'Here\'s what sets us apart.',
+          'why.item1.title': 'Clear communication',
+          'why.item1.desc': 'No jargon. We explain everything simply and keep you informed every step of the way.',
+          'why.item2.title': 'Fast delivery',
+          'why.item2.desc': 'Most small sites are delivered in days, not weeks.',
+          'why.item3.title': 'Fair prices',
+          'why.item3.desc': 'Transparent and affordable pricing. No hidden fees. You know exactly what you\'re paying for.',
+          'why.item4.title': 'Mobile version',
+          'why.item4.desc': 'Every site we create looks great on phone, tablet, and desktop.',
+          'why.item5.title': 'Personal approach',
+          'why.item5.desc': 'You communicate directly with us — not a call center or automated system.',
+          'why.item6.title': 'Reliable & secure',
+          'why.item6.desc': 'We ensure your site is stable, fast, and secure for your visitors.',
+          'contact.tag': 'Contact us',
+          'contact.title': 'Want to get<br>on the internet?',
+          'contact.subtitle': 'Reach out and we\'ll get back to you quickly. No obligations.',
+          'contact.email.label': 'Email',
+          'contact.phone.label': 'Phone',
+          'contact.cta': 'Send us a message →',
+          'footer.text': '&copy; 2026 <strong>MirIS</strong>. All rights reserved. Simple websites for everyone.',
+          'meta.title': 'MirIS – Simple websites for everyone',
+          'meta.desc': 'MirIS – Simple and professional websites for small businesses and individuals. Landing pages, company sites, portfolio, and web maintenance.'
+        }
+      };
+
+      function switchLang(lang) {
+        var keys = i18n[lang];
+        if (!keys) return;
+        html.setAttribute('lang', lang);
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n');
+          var text = keys[key];
+          if (text === undefined) return;
+          if (text.indexOf('<') !== -1) {
+            el.innerHTML = text;
+          } else {
+            el.textContent = text;
+          }
+        });
+        document.title = keys['meta.title'] || document.title;
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc && keys['meta.desc']) metaDesc.setAttribute('content', keys['meta.desc']);
+        document.querySelector('.lang-toggle').textContent = lang.toUpperCase();
+        localStorage.setItem('lang', lang);
+      }
+
+      var langToggle = document.querySelector('.lang-toggle');
+      var storedLang = localStorage.getItem('lang') || 'sk';
+      langToggle.addEventListener('click', function() {
+        var current = html.getAttribute('lang') || 'sk';
+        var next = current === 'sk' ? 'en' : 'sk';
+        switchLang(next);
+      });
+      switchLang(storedLang);
     })();
   </script>
 </body>
